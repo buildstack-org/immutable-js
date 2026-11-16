@@ -16,6 +16,7 @@ jobs:
           node-version: '22'
       - run: npm ci
       - run: npm install --no-save jest-junit@16.0.0
+      - run: npm run build:dist
       - name: Run Jest
         env:
           JEST_JUNIT_OUTPUT_NAME: junit-jest.xml
