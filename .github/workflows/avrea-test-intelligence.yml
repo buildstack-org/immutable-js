@@ -19,4 +19,6 @@ jobs:
       - name: Run Jest
         env:
           JEST_JUNIT_OUTPUT_NAME: junit-jest.xml
+          # Name each suite by its file, so equal test titles in two files stay apart.
+          JEST_JUNIT_SUITE_NAME: '{filepath}'
         run: npx jest --reporters=default --reporters=jest-junit
