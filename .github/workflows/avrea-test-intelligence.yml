@@ -1,0 +1,22 @@
+name: Avrea Test Intelligence
+
+# Runs this project's own tests on Avrea runners and writes the JUnit report
+# Avrea reads. Manual only; not part of the upstream project.
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: buildstack-dev-varjo
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: npm install --no-save jest-junit@16.0.0
+      - name: Run Jest
+        env:
+          JEST_JUNIT_OUTPUT_NAME: junit-jest.xml
+        run: npx jest --reporters=default --reporters=jest-junit
